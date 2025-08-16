@@ -4,7 +4,6 @@ import { FilterOptions } from '@/lib/types';
 import { Search, SlidersHorizontal, X } from 'lucide-react';
 import * as Select from '@radix-ui/react-select';
 import * as Slider from '@radix-ui/react-slider';
-import { cn } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
 
 interface FiltersProps {
@@ -41,7 +40,7 @@ export function Filters({ filters, onFiltersChange, categories, maxPrice }: Filt
         <label className="block text-sm font-medium text-gray-700 mb-2">
           {t('filters.sortBy')}
         </label>
-        <Select.Root value={filters.sortBy} onValueChange={(value: any) => onFiltersChange({ ...filters, sortBy: value })}>
+        <Select.Root value={filters.sortBy} onValueChange={(value) => onFiltersChange({ ...filters, sortBy: value as FilterOptions['sortBy'] })}>
           <Select.Trigger className="w-full px-4 py-2 border border-gray-200 rounded-lg flex items-center justify-between hover:bg-gray-50 text-gray-900">
             <Select.Value className="text-gray-900" />
             <Select.Icon>

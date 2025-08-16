@@ -1,17 +1,34 @@
 import Papa from 'papaparse';
 import { Product, CategoryStats } from './types';
 
+interface CSVRow {
+  Category: string;
+  ID: string;
+  Name: string;
+  Price: string;
+  'Original Price': string;
+  'Discount %': string;
+  Currency: string;
+  'Display Price': string;
+  'Store ID': string;
+  'Store Name': string;
+  'Item MSID': string;
+  'Stock Level': string;
+  Limit: string;
+  'Image URL': string;
+}
+
 export async function fetchProducts(): Promise<Product[]> {
   try {
     const response = await fetch('/products.csv');
     const csvText = await response.text();
     
-    const result = Papa.parse<any>(csvText, {
+    const result = Papa.parse<CSVRow>(csvText, {
       header: true,
       skipEmptyLines: true,
     });
     
-    return result.data.map((row: any) => ({
+    return result.data.map((row) => ({
       category: row.Category || '',
       id: row.ID || '',
       name: row.Name || '',

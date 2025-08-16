@@ -3,7 +3,6 @@
 import { useLocale } from 'next-intl';
 import { useRouter, usePathname } from 'next/navigation';
 import { Globe } from 'lucide-react';
-import { locales } from '@/i18n';
 
 export function LanguageSwitcher() {
   const locale = useLocale();
