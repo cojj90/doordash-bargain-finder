@@ -20,7 +20,14 @@ interface CSVRow {
 
 export async function fetchProducts(): Promise<Product[]> {
   try {
-    const response = await fetch('/products.csv');
+    // In production, use the full URL; in development, use relative path
+    const baseUrl = typeof window !== 'undefined' 
+      ? window.location.origin 
+      : process.env.NEXT_PUBLIC_VERCEL_URL 
+        ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+        : 'http://localhost:3000';
+    
+    const response = await fetch(`${baseUrl}/products.csv`);
     const csvText = await response.text();
     
     const result = Papa.parse<CSVRow>(csvText, {

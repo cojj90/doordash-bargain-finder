@@ -38,6 +38,3 @@ next-env.d.ts
 
 # turbopack
 .turbo
-
-# products data (can be regenerated)
-/public/products.csv
