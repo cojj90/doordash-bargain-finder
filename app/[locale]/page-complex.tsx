@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { Product, FilterOptions } from '@/lib/types';
 import { fetchProducts, getCategoryStats, getTopDeals, getBiggestSavings } from '@/lib/data';
@@ -9,20 +9,15 @@ import { ProductCard } from '@/components/product-card';
 import { Filters } from '@/components/filters';
 import { StatsDashboard } from '@/components/stats-dashboard';
 import { LanguageSwitcher } from '@/components/language-switcher';
-import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 import * as Tabs from '@radix-ui/react-tabs';
 import { TrendingUp, DollarSign, Grid3x3, BarChart, Loader2, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const ITEMS_PER_PAGE = 30;
 
 export default function Home() {
   const t = useTranslations();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('browse');
-  const [displayedItems, setDisplayedItems] = useState(ITEMS_PER_PAGE);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [filters, setFilters] = useState<FilterOptions>({
     categories: [],
     priceRange: [0, 1000],
@@ -42,11 +37,6 @@ export default function Home() {
     };
     loadProducts();
   }, []);
-
-  // Reset displayed items when filters change
-  useEffect(() => {
-    setDisplayedItems(ITEMS_PER_PAGE);
-  }, [filters]);
 
   const categories = useMemo(() => {
     return Array.from(new Set(products.map(p => p.category))).sort();
@@ -114,29 +104,6 @@ export default function Home() {
 
     return filtered;
   }, [products, filters]);
-
-  const visibleProducts = useMemo(() => {
-    return filteredProducts.slice(0, displayedItems);
-  }, [filteredProducts, displayedItems]);
-
-  const hasMore = displayedItems < filteredProducts.length;
-
-  const loadMore = useCallback(() => {
-    if (isLoadingMore || !hasMore) return;
-    
-    setIsLoadingMore(true);
-    // Simulate a small delay for smooth loading experience
-    setTimeout(() => {
-      setDisplayedItems(prev => Math.min(prev + ITEMS_PER_PAGE, filteredProducts.length));
-      setIsLoadingMore(false);
-    }, 300);
-  }, [isLoadingMore, hasMore, filteredProducts.length]);
-
-  const { loadMoreRef } = useInfiniteScroll({
-    hasMore,
-    loading: isLoadingMore,
-    onLoadMore: loadMore,
-  });
 
   const topDeals = useMemo(() => getTopDeals(products, 12), [products]);
   const biggestSavings = useMemo(() => getBiggestSavings(products, 12), [products]);
@@ -212,7 +179,7 @@ export default function Home() {
             </Tabs.Trigger>
           </Tabs.List>
 
-          {/* Browse Tab with Infinite Scroll */}
+          {/* Browse Tab */}
           <Tabs.Content value="browse">
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
               <div className="lg:col-span-1">
@@ -231,49 +198,26 @@ export default function Home() {
                     <p className="text-gray-600">{t('product.adjustFilters')}</p>
                   </div>
                 ) : (
-                  <>
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={filters.searchQuery + filters.sortBy}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
-                      >
-                        {visibleProducts.map((product, index) => (
-                          <ProductCard key={product.id} product={product} index={index % ITEMS_PER_PAGE} />
-                        ))}
-                      </motion.div>
-                    </AnimatePresence>
-
-                    {/* Infinite scroll trigger */}
-                    {hasMore && (
-                      <div 
-                        ref={loadMoreRef}
-                        className="flex justify-center items-center py-8"
-                      >
-                        {isLoadingMore ? (
-                          <div className="flex items-center gap-3">
-                            <Loader2 className="w-6 h-6 text-blue-500 animate-spin" />
-                            <span className="text-gray-600">Loading more products...</span>
-                          </div>
-                        ) : (
-                          <div className="text-gray-500 text-sm">
-                            Scroll to load more
-                          </div>
-                        )}
-                      </div>
-                    )}
-
-                    {/* Show count */}
-                    {!hasMore && visibleProducts.length > 0 && (
-                      <div className="mt-8 text-center">
-                        <p className="text-gray-600">
-                          {t('product.showingProducts', { shown: visibleProducts.length, total: filteredProducts.length })}
-                        </p>
-                      </div>
-                    )}
-                  </>
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={filters.searchQuery + filters.sortBy}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
+                    >
+                      {filteredProducts.slice(0, 30).map((product, index) => (
+                        <ProductCard key={product.id} product={product} index={index} />
+                      ))}
+                    </motion.div>
+                  </AnimatePresence>
+                )}
+                {filteredProducts.length > 30 && (
+                  <div className="mt-8 text-center">
+                    <p className="text-gray-600">
+                      {t('product.showingProducts', { shown: 30, total: filteredProducts.length })}
+                    </p>
+                  </div>
                 )}
               </div>
             </div>
