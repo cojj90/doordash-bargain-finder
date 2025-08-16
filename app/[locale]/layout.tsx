@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   title: "DoorDash Bargain Finder | Find the Best Deals",
   description: "Discover amazing discounts and savings on DoorDash products. Browse through thousands of deals, track price drops, and never miss a bargain!",
   keywords: "doordash, deals, discounts, bargains, savings, shopping, groceries",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
 };
 
 export default async function LocaleLayout({

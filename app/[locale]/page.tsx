@@ -158,19 +158,19 @@ export default function Home() {
       {/* Header */}
       <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-2 rounded-lg">
-                <TrendingUp className="w-8 h-8 text-white" />
+              <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-2 rounded-lg flex-shrink-0">
+                <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900">{t('app.title')}</h1>
-                <p className="text-sm text-gray-600">{t('app.subtitle', { count: products.length })}</p>
+              <div className="min-w-0">
+                <h1 className="text-xl sm:text-2xl font-bold text-gray-900 truncate">{t('app.title')}</h1>
+                <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">{t('app.subtitle', { count: products.length })}</p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               <LanguageSwitcher />
-              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+              <span className="bg-green-100 text-green-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap">
                 {t('app.dealsFound', { count: filteredProducts.length })}
               </span>
             </div>
@@ -181,34 +181,38 @@ export default function Home() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs.Root value={activeTab} onValueChange={setActiveTab}>
-          <Tabs.List className="flex gap-2 mb-8 bg-white rounded-lg p-1 shadow-sm border border-gray-100">
+          <Tabs.List className="flex gap-1 sm:gap-2 mb-8 bg-white rounded-lg p-1 shadow-sm border border-gray-100 overflow-x-auto">
             <Tabs.Trigger
               value="browse"
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors data-[state=active]:bg-blue-500 data-[state=active]:text-white data-[state=inactive]:text-gray-600 hover:text-gray-900"
+              className="flex-1 min-w-[80px] flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors data-[state=active]:bg-blue-500 data-[state=active]:text-white data-[state=inactive]:text-gray-600 hover:text-gray-900 whitespace-nowrap"
             >
-              <Grid3x3 className="w-4 h-4" />
-              {t('navigation.browseAll')}
+              <Grid3x3 className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+              <span className="hidden sm:inline">{t('navigation.browseAll')}</span>
+              <span className="sm:hidden">Browse</span>
             </Tabs.Trigger>
             <Tabs.Trigger
               value="top-deals"
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors data-[state=active]:bg-blue-500 data-[state=active]:text-white data-[state=inactive]:text-gray-600 hover:text-gray-900"
+              className="flex-1 min-w-[80px] flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors data-[state=active]:bg-blue-500 data-[state=active]:text-white data-[state=inactive]:text-gray-600 hover:text-gray-900 whitespace-nowrap"
             >
-              <TrendingUp className="w-4 h-4" />
-              {t('navigation.topDeals')}
+              <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+              <span className="hidden sm:inline">{t('navigation.topDeals')}</span>
+              <span className="sm:hidden">Deals</span>
             </Tabs.Trigger>
             <Tabs.Trigger
               value="biggest-savings"
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors data-[state=active]:bg-blue-500 data-[state=active]:text-white data-[state=inactive]:text-gray-600 hover:text-gray-900"
+              className="flex-1 min-w-[80px] flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors data-[state=active]:bg-blue-500 data-[state=active]:text-white data-[state=inactive]:text-gray-600 hover:text-gray-900 whitespace-nowrap"
             >
-              <DollarSign className="w-4 h-4" />
-              {t('navigation.biggestSavings')}
+              <DollarSign className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+              <span className="hidden sm:inline">{t('navigation.biggestSavings')}</span>
+              <span className="sm:hidden">Savings</span>
             </Tabs.Trigger>
             <Tabs.Trigger
               value="analytics"
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors data-[state=active]:bg-blue-500 data-[state=active]:text-white data-[state=inactive]:text-gray-600 hover:text-gray-900"
+              className="flex-1 min-w-[80px] flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors data-[state=active]:bg-blue-500 data-[state=active]:text-white data-[state=inactive]:text-gray-600 hover:text-gray-900 whitespace-nowrap"
             >
-              <BarChart className="w-4 h-4" />
-              {t('navigation.analytics')}
+              <BarChart className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+              <span className="hidden sm:inline">{t('navigation.analytics')}</span>
+              <span className="sm:hidden">Stats</span>
             </Tabs.Trigger>
           </Tabs.List>
 
