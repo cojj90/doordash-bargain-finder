@@ -1,0 +1,83 @@
+{
+  "app": {
+    "title": "DoorDash Bargain Finder",
+    "subtitle": "Find the best deals from {count} products",
+    "dealsFound": "{count} deals found"
+  },
+  "navigation": {
+    "browseAll": "Browse All",
+    "topDeals": "Top Deals",
+    "biggestSavings": "Biggest Savings",
+    "analytics": "Analytics"
+  },
+  "filters": {
+    "title": "Filters",
+    "searchProducts": "Search Products",
+    "searchPlaceholder": "Search by name...",
+    "sortBy": "Sort By",
+    "sortOptions": {
+      "discount": "Highest Discount",
+      "savings": "Biggest Savings",
+      "priceLow": "Price: Low to High",
+      "priceHigh": "Price: High to Low",
+      "name": "Name: A to Z"
+    },
+    "categories": "Categories",
+    "priceRange": "Price Range: ${min} - ${max}",
+    "minimumDiscount": "Minimum Discount: {percent}%",
+    "purchaseLimit": "Purchase Limit",
+    "allProducts": "All Products",
+    "withLimit": "With Limit",
+    "noLimit": "No Limit",
+    "clearFilters": "Clear Filters"
+  },
+  "product": {
+    "save": "Save {amount}",
+    "limit": "Limit {count}",
+    "viewDeal": "View Deal",
+    "off": "{percent}% OFF",
+    "noProductsFound": "No products found",
+    "adjustFilters": "Try adjusting your filters to see more results",
+    "showingProducts": "Showing {shown} of {total} products"
+  },
+  "topDeals": {
+    "title": "🔥 Hottest Deals",
+    "subtitle": "Products with the highest discount percentages"
+  },
+  "biggestSavings": {
+    "title": "💰 Maximum Savings",
+    "subtitle": "Products with the largest dollar amount saved"
+  },
+  "stats": {
+    "totalProducts": "Total Products",
+    "productsOnSale": "Products on Sale",
+    "averageDiscount": "Average Discount",
+    "totalSavings": "Total Savings",
+    "categoryDistribution": "Category Distribution",
+    "averageDiscountByCategory": "Average Discount by Category"
+  },
+  "categories": {
+    "alcohol": "Alcohol",
+    "baby": "Baby",
+    "bakery": "Bakery",
+    "beauty": "Beauty",
+    "candy": "Candy",
+    "deli": "Deli",
+    "diary": "Dairy",
+    "drinks": "Drinks",
+    "flowers": "Flowers",
+    "frozen": "Frozen",
+    "household": "Household",
+    "meat": "Meat",
+    "medecine": "Medicine",
+    "outdoor": "Outdoor",
+    "pantry": "Pantry",
+    "personal": "Personal",
+    "pet": "Pet",
+    "prepared": "Prepared",
+    "produce": "Produce",
+    "seafood": "Seafood",
+    "snacks": "Snacks",
+    "viatamin": "Vitamins"
+  }
+}

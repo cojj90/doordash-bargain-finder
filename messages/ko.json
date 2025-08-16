@@ -1,0 +1,83 @@
+{
+  "app": {
+    "title": "도어대시 특가 찾기",
+    "subtitle": "{count}개 상품에서 최고의 할인 찾기",
+    "dealsFound": "{count}개 특가 발견"
+  },
+  "navigation": {
+    "browseAll": "전체 보기",
+    "topDeals": "인기 특가",
+    "biggestSavings": "최대 할인",
+    "analytics": "분석"
+  },
+  "filters": {
+    "title": "필터",
+    "searchProducts": "상품 검색",
+    "searchPlaceholder": "상품명으로 검색...",
+    "sortBy": "정렬 기준",
+    "sortOptions": {
+      "discount": "할인율 높은순",
+      "savings": "할인액 큰순",
+      "priceLow": "가격 낮은순",
+      "priceHigh": "가격 높은순",
+      "name": "이름순 (가나다)"
+    },
+    "categories": "카테고리",
+    "priceRange": "가격 범위: ${min} - ${max}",
+    "minimumDiscount": "최소 할인율: {percent}%",
+    "purchaseLimit": "구매 제한",
+    "allProducts": "모든 상품",
+    "withLimit": "제한 있음",
+    "noLimit": "제한 없음",
+    "clearFilters": "필터 초기화"
+  },
+  "product": {
+    "save": "{amount} 절약",
+    "limit": "제한 {count}개",
+    "viewDeal": "특가 보기",
+    "off": "{percent}% 할인",
+    "noProductsFound": "상품을 찾을 수 없습니다",
+    "adjustFilters": "더 많은 결과를 보려면 필터를 조정해보세요",
+    "showingProducts": "전체 {total}개 중 {shown}개 표시"
+  },
+  "topDeals": {
+    "title": "🔥 핫딜 특가",
+    "subtitle": "가장 높은 할인율 상품"
+  },
+  "biggestSavings": {
+    "title": "💰 최대 절약",
+    "subtitle": "가장 많은 금액을 절약할 수 있는 상품"
+  },
+  "stats": {
+    "totalProducts": "전체 상품",
+    "productsOnSale": "할인 상품",
+    "averageDiscount": "평균 할인율",
+    "totalSavings": "총 절약액",
+    "categoryDistribution": "카테고리 분포",
+    "averageDiscountByCategory": "카테고리별 평균 할인율"
+  },
+  "categories": {
+    "alcohol": "주류",
+    "baby": "유아용품",
+    "bakery": "베이커리",
+    "beauty": "뷰티",
+    "candy": "사탕/과자",
+    "deli": "델리",
+    "diary": "유제품",
+    "drinks": "음료",
+    "flowers": "꽃",
+    "frozen": "냉동식품",
+    "household": "생활용품",
+    "meat": "육류",
+    "medecine": "의약품",
+    "outdoor": "아웃도어",
+    "pantry": "식료품",
+    "personal": "개인용품",
+    "pet": "애완용품",
+    "prepared": "조리식품",
+    "produce": "농산물",
+    "seafood": "해산물",
+    "snacks": "스낵",
+    "viatamin": "비타민"
+  }
+}
