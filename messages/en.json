@@ -2,19 +2,26 @@
   "app": {
     "title": "DoorDash Bargain Finder",
     "subtitle": "Find the best deals from {count} products",
-    "dealsFound": "{count} deals found"
+    "dealsFound": "{count} deals found",
+    "loadingBargains": "Loading bargains...",
+    "loadingMoreProducts": "Loading more products...",
+    "scrollToLoadMore": "Scroll to load more"
   },
   "navigation": {
     "browseAll": "Browse All",
+    "browseShort": "Browse",
     "topDeals": "Top Deals",
+    "topDealsShort": "Top",
     "biggestSavings": "Biggest Savings",
-    "analytics": "Analytics"
+    "biggestSavingsShort": "Savings",
+    "analytics": "Analytics",
+    "menu": "Menu"
   },
   "filters": {
     "title": "Filters",
     "searchProducts": "Search Products",
-    "searchPlaceholder": "Search by name...",
-    "sortBy": "Sort By",
+    "searchPlaceholder": "Search products...",
+    "sortBy": "Sort by",
     "sortOptions": {
       "discount": "Highest Discount",
       "savings": "Biggest Savings",
@@ -23,8 +30,23 @@
       "name": "Name: A to Z"
     },
     "categories": "Categories",
-    "priceRange": "Price Range: ${min} - ${max}",
-    "minimumDiscount": "Minimum Discount: {percent}%",
+    "price": "Price",
+    "discount": "Discount",
+    "priceRange": "Price Range",
+    "priceRangeLabel": "${min} - ${max}",
+    "minimumDiscount": "Minimum Discount",
+    "minimumDiscountLabel": "At least {percent}% off",
+    "anyDiscount": "Any discount",
+    "anyPrice": "Any price",
+    "range": "Range",
+    "atLeast": "At least",
+    "any": "Any",
+    "clear": "Clear",
+    "clearAll": "Clear all",
+    "clearPriceFilter": "Clear price filter",
+    "clearDiscountFilter": "Clear discount filter",
+    "clearAllCategories": "Clear all categories",
+    "active": "Active",
     "purchaseLimit": "Purchase Limit",
     "allProducts": "All Products",
     "withLimit": "With Limit",

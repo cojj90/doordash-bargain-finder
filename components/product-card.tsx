@@ -106,17 +106,17 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
         </div>
 
         {/* Store Info */}
-        <div className="mt-3 pt-3 border-t border-gray-100">
+        {/* <div className="mt-3 pt-3 border-t border-gray-100">
           <p className="text-xs text-gray-500">
             {product.storeName} • {product.storeId}
           </p>
-        </div>
+        </div> */}
 
         {/* Action Button */}
-        <button className="mt-3 w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors">
+        {/* <button className="mt-3 w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors">
           <ShoppingCart className="w-4 h-4" />
           {t('product.viewDeal')}
-        </button>
+        </button> */}
       </div>
     </motion.div>
   );

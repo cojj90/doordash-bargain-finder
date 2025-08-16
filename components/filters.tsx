@@ -5,6 +5,7 @@ import { Search, SlidersHorizontal, X } from 'lucide-react';
 import * as Select from '@radix-ui/react-select';
 import * as Slider from '@radix-ui/react-slider';
 import { useTranslations } from 'next-intl';
+import { CategoryFilter } from './category-filter';
 
 interface FiltersProps {
   filters: FilterOptions;
@@ -71,36 +72,23 @@ export function Filters({ filters, onFiltersChange, categories, maxPrice }: Filt
         </Select.Root>
       </div>
 
-      {/* Category Filter */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          {t('filters.categories')}
-        </label>
-        <div className="space-y-2 max-h-48 overflow-y-auto">
-          {categories.map((category) => (
-            <label key={category} className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1 rounded">
-              <input
-                type="checkbox"
-                checked={filters.categories.includes(category)}
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    onFiltersChange({ ...filters, categories: [...filters.categories, category] });
-                  } else {
-                    onFiltersChange({ ...filters, categories: filters.categories.filter(c => c !== category) });
-                  }
-                }}
-                className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
-              />
-              <span className="text-sm text-gray-700 capitalize">{t(`categories.${category}`)}</span>
-            </label>
-          ))}
-        </div>
-      </div>
+      {/* Category Filter - New Design */}
+      <CategoryFilter
+        categories={categories}
+        selectedCategories={filters.categories}
+        onCategoryToggle={(category) => {
+          if (filters.categories.includes(category)) {
+            onFiltersChange({ ...filters, categories: filters.categories.filter(c => c !== category) });
+          } else {
+            onFiltersChange({ ...filters, categories: [...filters.categories, category] });
+          }
+        }}
+      />
 
       {/* Price Range */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          {t('filters.priceRange', { min: filters.priceRange[0], max: filters.priceRange[1] })}
+          {t('filters.priceRange')} ({t('filters.priceRangeLabel', { min: filters.priceRange[0], max: filters.priceRange[1] })})
         </label>
         <Slider.Root
           className="relative flex items-center select-none touch-none w-full h-5"
@@ -121,24 +109,24 @@ export function Filters({ filters, onFiltersChange, categories, maxPrice }: Filt
       {/* Minimum Discount */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          {t('filters.minimumDiscount', { percent: filters.minDiscount })}
+          {t('filters.minimumDiscount')} ({t('filters.minimumDiscountLabel', { percent: filters.minDiscount })})
         </label>
         <Slider.Root
           className="relative flex items-center select-none touch-none w-full h-5"
           value={[filters.minDiscount]}
           onValueChange={(value: number[]) => onFiltersChange({ ...filters, minDiscount: value[0] })}
-          max={60}
-          step={5}
+          max={50}
+          step={1}
         >
           <Slider.Track className="bg-gray-200 relative grow rounded-full h-2">
-            <Slider.Range className="absolute bg-green-500 rounded-full h-full" />
+            <Slider.Range className="absolute bg-blue-500 rounded-full h-full" />
           </Slider.Track>
-          <Slider.Thumb className="block w-5 h-5 bg-white border-2 border-green-500 rounded-full hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-500" />
+          <Slider.Thumb className="block w-5 h-5 bg-white border-2 border-blue-500 rounded-full hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500" />
         </Slider.Root>
       </div>
 
       {/* Has Limit Filter */}
-      <div>
+      {/* <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
           {t('filters.purchaseLimit')}
         </label>
@@ -171,7 +159,7 @@ export function Filters({ filters, onFiltersChange, categories, maxPrice }: Filt
             <span className="text-sm text-gray-700">{t('filters.noLimit')}</span>
           </label>
         </div>
-      </div>
+      </div> */}
 
       {/* Clear Filters */}
       <button

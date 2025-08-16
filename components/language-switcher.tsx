@@ -2,7 +2,12 @@
 
 import { useLocale } from 'next-intl';
 import { useRouter, usePathname } from 'next/navigation';
-import { Globe } from 'lucide-react';
+import { Check } from 'lucide-react';
+
+const languages = [
+  { code: 'en', name: 'English', flag: '🇺🇸', nativeName: 'English' },
+  { code: 'ko', name: 'Korean', flag: '🇰🇷', nativeName: '한국어' },
+];
 
 export function LanguageSwitcher() {
   const locale = useLocale();
@@ -18,16 +23,26 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <div className="flex items-center gap-2 bg-white rounded-lg px-3 py-2 shadow-sm border border-gray-100">
-      <Globe className="w-4 h-4 text-gray-500" />
-      <select
-        value={locale}
-        onChange={(e) => handleLocaleChange(e.target.value)}
-        className="bg-transparent text-sm font-medium text-gray-700 focus:outline-none cursor-pointer"
-      >
-        <option value="en">English</option>
-        <option value="ko">한국어</option>
-      </select>
+    <div className="space-y-1">
+      {languages.map((language) => (
+        <button
+          key={language.code}
+          onClick={() => handleLocaleChange(language.code)}
+          className={`w-full flex items-center justify-between gap-3 px-3 py-2 rounded-lg transition-all ${
+            locale === language.code
+              ? 'bg-blue-50 text-blue-700'
+              : 'text-gray-700 hover:bg-gray-50'
+          }`}
+        >
+          <div className="flex items-center gap-3">
+            <span className="text-lg">{language.flag}</span>
+            <span className="text-sm">{language.nativeName}</span>
+          </div>
+          {locale === language.code && (
+            <Check className="w-4 h-4 text-blue-600 flex-shrink-0" />
+          )}
+        </button>
+      ))}
     </div>
   );
 }

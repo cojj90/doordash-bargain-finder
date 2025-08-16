@@ -2,19 +2,26 @@
   "app": {
     "title": "도어대시 특가 찾기",
     "subtitle": "{count}개 상품에서 최고의 할인 찾기",
-    "dealsFound": "{count}개 특가 발견"
+    "dealsFound": "{count}개 특가 발견",
+    "loadingBargains": "특가 로딩 중...",
+    "loadingMoreProducts": "더 많은 상품 로딩 중...",
+    "scrollToLoadMore": "스크롤하여 더 보기"
   },
   "navigation": {
     "browseAll": "전체 보기",
+    "browseShort": "전체",
     "topDeals": "인기 특가",
+    "topDealsShort": "인기",
     "biggestSavings": "최대 할인",
-    "analytics": "분석"
+    "biggestSavingsShort": "할인",
+    "analytics": "분석",
+    "menu": "메뉴"
   },
   "filters": {
     "title": "필터",
     "searchProducts": "상품 검색",
-    "searchPlaceholder": "상품명으로 검색...",
-    "sortBy": "정렬 기준",
+    "searchPlaceholder": "상품 검색...",
+    "sortBy": "정렬",
     "sortOptions": {
       "discount": "할인율 높은순",
       "savings": "할인액 큰순",
@@ -23,8 +30,23 @@
       "name": "이름순 (가나다)"
     },
     "categories": "카테고리",
-    "priceRange": "가격 범위: ${min} - ${max}",
-    "minimumDiscount": "최소 할인율: {percent}%",
+    "price": "가격",
+    "discount": "할인",
+    "priceRange": "가격 범위",
+    "priceRangeLabel": "${min} - ${max}",
+    "minimumDiscount": "최소 할인",
+    "minimumDiscountLabel": "최소 {percent}% 할인",
+    "anyDiscount": "모든 할인",
+    "anyPrice": "모든 가격",
+    "range": "범위",
+    "atLeast": "최소",
+    "any": "모두",
+    "clear": "지우기",
+    "clearAll": "모두 지우기",
+    "clearPriceFilter": "가격 필터 지우기",
+    "clearDiscountFilter": "할인 필터 지우기",
+    "clearAllCategories": "모든 카테고리 지우기",
+    "active": "활성",
     "purchaseLimit": "구매 제한",
     "allProducts": "모든 상품",
     "withLimit": "제한 있음",
