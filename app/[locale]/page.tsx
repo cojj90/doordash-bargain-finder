@@ -302,7 +302,7 @@ export default function Home() {
           <Tabs.Content value="browse">
             <div className="">
               {/* Filters - Desktop */}
-              <div className="hidden lg:block">
+              <div className="hidden lg:block pb-4">
                 <FiltersHorizontal
                   filters={filters}
                   onFiltersChange={setFilters}
