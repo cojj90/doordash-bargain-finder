@@ -356,7 +356,7 @@ export default function Home() {
               </AnimatePresence>
 
               {/* Results Counter */}
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between pb-4">
                 <span className="text-sm text-gray-600">
                   {filteredProducts.length === 0 
                     ? t('product.noProductsFound')
@@ -466,9 +466,9 @@ export default function Home() {
           animate={{ scale: 1 }}
           exit={{ scale: 0 }}
           onClick={() => setShowMobileFilters(true)}
-          className="fixed bottom-20 left-4 bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-600 transition-colors lg:hidden z-30 flex items-center gap-2"
+          className="fixed bottom-6 right-4 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition-colors lg:hidden z-30 flex items-center gap-2"
         >
-          <Filter className="w-5 h-5" />
+          <Filter className="w-6 h-6" />
           {activeFiltersCount > 0 && (
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center font-semibold">
               {activeFiltersCount}
@@ -485,7 +485,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             onClick={scrollToTop}
-            className="fixed bottom-4 right-4 bg-gray-800 text-white p-3 rounded-full shadow-lg hover:bg-gray-700 transition-colors z-30"
+            className="fixed bottom-[5.5rem] right-4 bg-gray-800 text-white p-3 rounded-full shadow-lg hover:bg-gray-700 transition-colors z-30"
             aria-label="Scroll to top"
           >
             <ChevronUp className="w-6 h-6" />
