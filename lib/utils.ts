@@ -12,12 +12,15 @@ export function formatCurrency(amount: number, currency: string = 'NZD'): string
   }).format(amount);
 }
 
-export function formatDiscount(discount: number | null): string {
-  if (!discount) return '';
-  return `${discount}% OFF`;
+export function formatPriceChange(pct: number | null): string {
+  if (pct === null || pct === 0) return '';
+  const abs = Math.abs(pct);
+  return pct < 0 ? `${abs}% cheaper` : `${abs}% more`;
 }
 
-export function calculateSavings(originalPrice: number | null, price: number): number {
-  if (!originalPrice) return 0;
-  return originalPrice - price;
+export function formatDate(yyyymmdd: string): string {
+  const y = yyyymmdd.slice(0, 4);
+  const m = yyyymmdd.slice(4, 6);
+  const d = yyyymmdd.slice(6, 8);
+  return `${d}/${m}/${y}`;
 }

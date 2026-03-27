@@ -5,7 +5,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { Check } from 'lucide-react';
 
 const languages = [
-  { code: 'en', name: 'English', flag: '🇺🇸', nativeName: 'English' },
+  { code: 'en', name: 'English', flag: '🇬🇧', nativeName: 'English' },
   { code: 'ko', name: 'Korean', flag: '🇰🇷', nativeName: '한국어' },
 ];
 

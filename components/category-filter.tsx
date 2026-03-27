@@ -123,7 +123,7 @@ export function CategoryFilter({ categories, selectedCategories, onCategoryToggl
         </label>
         {selectedCategories.length > 0 && (
           <span className="text-xs text-gray-500">
-            {selectedCategories.length} selected
+            {t('filters.selected', { count: selectedCategories.length })}
           </span>
         )}
       </div>
@@ -176,7 +176,7 @@ export function CategoryFilter({ categories, selectedCategories, onCategoryToggl
           onClick={() => selectedCategories.forEach(cat => onCategoryToggle(cat))}
           className="text-xs text-blue-600 hover:text-blue-700 font-medium"
         >
-          Clear categories
+          {t('filters.clearCategories')}
         </button>
       )}
     </div>

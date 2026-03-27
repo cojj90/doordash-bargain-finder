@@ -16,7 +16,7 @@ interface FiltersProps {
 
 export function Filters({ filters, onFiltersChange, categories, maxPrice }: FiltersProps) {
   const t = useTranslations();
-  
+
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 space-y-6">
       {/* Search Bar */}
@@ -51,11 +51,8 @@ export function Filters({ filters, onFiltersChange, categories, maxPrice }: Filt
           <Select.Portal>
             <Select.Content className="bg-white rounded-lg shadow-lg border border-gray-200 p-1 z-50">
               <Select.Viewport>
-                <Select.Item value="discount" className="px-3 py-2 hover:bg-gray-100 rounded cursor-pointer outline-none text-gray-900">
-                  <Select.ItemText>{t('filters.sortOptions.discount')}</Select.ItemText>
-                </Select.Item>
-                <Select.Item value="savings" className="px-3 py-2 hover:bg-gray-100 rounded cursor-pointer outline-none text-gray-900">
-                  <Select.ItemText>{t('filters.sortOptions.savings')}</Select.ItemText>
+                <Select.Item value="price-drop" className="px-3 py-2 hover:bg-gray-100 rounded cursor-pointer outline-none text-gray-900">
+                  <Select.ItemText>{t('filters.sortOptions.priceDrop')}</Select.ItemText>
                 </Select.Item>
                 <Select.Item value="price-low" className="px-3 py-2 hover:bg-gray-100 rounded cursor-pointer outline-none text-gray-900">
                   <Select.ItemText>{t('filters.sortOptions.priceLow')}</Select.ItemText>
@@ -72,7 +69,7 @@ export function Filters({ filters, onFiltersChange, categories, maxPrice }: Filt
         </Select.Root>
       </div>
 
-      {/* Category Filter - New Design */}
+      {/* Category Filter */}
       <CategoryFilter
         categories={categories}
         selectedCategories={filters.categories}
@@ -106,70 +103,34 @@ export function Filters({ filters, onFiltersChange, categories, maxPrice }: Filt
         </Slider.Root>
       </div>
 
-      {/* Minimum Discount */}
+      {/* Minimum Price Drop */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          {t('filters.minimumDiscount')} ({t('filters.minimumDiscountLabel', { percent: filters.minDiscount })})
+          {t('filters.minPriceDropLabel', { percent: filters.minPriceDrop })}
         </label>
         <Slider.Root
           className="relative flex items-center select-none touch-none w-full h-5"
-          value={[filters.minDiscount]}
-          onValueChange={(value: number[]) => onFiltersChange({ ...filters, minDiscount: value[0] })}
+          value={[filters.minPriceDrop]}
+          onValueChange={(value: number[]) => onFiltersChange({ ...filters, minPriceDrop: value[0] })}
           max={50}
           step={1}
         >
           <Slider.Track className="bg-gray-200 relative grow rounded-full h-2">
-            <Slider.Range className="absolute bg-blue-500 rounded-full h-full" />
+            <Slider.Range className="absolute bg-green-500 rounded-full h-full" />
           </Slider.Track>
-          <Slider.Thumb className="block w-5 h-5 bg-white border-2 border-blue-500 rounded-full hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <Slider.Thumb className="block w-5 h-5 bg-white border-2 border-green-500 rounded-full hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-500" />
         </Slider.Root>
       </div>
-
-      {/* Has Limit Filter */}
-      {/* <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          {t('filters.purchaseLimit')}
-        </label>
-        <div className="space-y-2">
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="radio"
-              checked={filters.hasLimit === null}
-              onChange={() => onFiltersChange({ ...filters, hasLimit: null })}
-              className="w-4 h-4 text-blue-600"
-            />
-            <span className="text-sm text-gray-700">{t('filters.allProducts')}</span>
-          </label>
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="radio"
-              checked={filters.hasLimit === true}
-              onChange={() => onFiltersChange({ ...filters, hasLimit: true })}
-              className="w-4 h-4 text-blue-600"
-            />
-            <span className="text-sm text-gray-700">{t('filters.withLimit')}</span>
-          </label>
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="radio"
-              checked={filters.hasLimit === false}
-              onChange={() => onFiltersChange({ ...filters, hasLimit: false })}
-              className="w-4 h-4 text-blue-600"
-            />
-            <span className="text-sm text-gray-700">{t('filters.noLimit')}</span>
-          </label>
-        </div>
-      </div> */}
 
       {/* Clear Filters */}
       <button
         onClick={() => onFiltersChange({
           categories: [],
           priceRange: [0, maxPrice],
-          minDiscount: 0,
+          minPriceDrop: 0,
           searchQuery: '',
-          sortBy: 'discount',
-          hasLimit: null,
+          sortBy: 'price-drop',
+          statusFilter: 'all',
         })}
         className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors"
       >

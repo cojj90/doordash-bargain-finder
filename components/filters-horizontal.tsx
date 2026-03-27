@@ -63,21 +63,20 @@ export function FiltersHorizontal({ filters, onFiltersChange, categories, maxPri
   // Helper to format price range label
   const getPriceLabel = () => {
     if (filters.priceRange[0] === 0 && filters.priceRange[1] === maxPrice) {
-      return 'Any price';
+      return t('filters.anyPrice');
     }
     return `$${filters.priceRange[0]} - $${filters.priceRange[1]}`;
   };
 
-  // Helper to format discount label
-  const getDiscountLabel = () => {
-    if (filters.minDiscount === 0) return 'Any discount';
-    return `${filters.minDiscount}%+ off`;
+  const getPriceDropLabel = () => {
+    if (filters.minPriceDrop === 0) return t('filters.anyChange');
+    return t('filters.percentPlusDrop', { percent: filters.minPriceDrop });
   };
 
-  // Count active filters for each category
   const priceActive = filters.priceRange[0] > 0 || filters.priceRange[1] < maxPrice;
-  const discountActive = filters.minDiscount > 0;
+  const priceDropActive = filters.minPriceDrop > 0;
   const categoriesActive = filters.categories.length > 0;
+  const statusActive = filters.statusFilter !== 'all';
 
   return (
     <div className="space-y-4">
@@ -168,39 +167,39 @@ export function FiltersHorizontal({ filters, onFiltersChange, categories, maxPri
             </Popover.Portal>
           </Popover.Root>
 
-          {/* Discount Filter */}
-          <Popover.Root open={openPopover === 'discount'} onOpenChange={(open) => setOpenPopover(open ? 'discount' : null)}>
+          {/* Price Drop Filter */}
+          <Popover.Root open={openPopover === 'priceDrop'} onOpenChange={(open) => setOpenPopover(open ? 'priceDrop' : null)}>
             <Popover.Trigger asChild>
               <button className={`px-4 py-2 text-sm border rounded-full flex items-center gap-2 transition-colors ${
-                discountActive
+                priceDropActive
                   ? 'border-blue-500 bg-blue-50 text-blue-700 font-medium'
                   : 'border-gray-200 hover:bg-gray-50 text-gray-700'
               }`}>
-                <span>{t('filters.discount')}</span>
+                <span>{t('filters.priceDrop')}</span>
                 <ChevronDown className="w-3 h-3" />
               </button>
             </Popover.Trigger>
             <Popover.Portal>
               <Popover.Content className="bg-white rounded-xl shadow-xl border border-gray-200 p-5 z-50 w-72" sideOffset={8}>
                 <div className="space-y-4">
-                  <h3 className="font-medium text-gray-900">{t('filters.minimumDiscount')}</h3>
-                  
+                  <h3 className="font-medium text-gray-900">{t('filters.minimumPriceDrop')}</h3>
+
                   <div className="space-y-3">
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-600">{t('filters.atLeast')}</span>
-                      <span className="font-medium text-gray-900">{filters.minDiscount}% off</span>
+                      <span className="font-medium text-gray-900">{t('filters.percentDrop', { percent: filters.minPriceDrop })}</span>
                     </div>
                     <Slider.Root
                       className="relative flex items-center select-none touch-none w-full h-5"
-                      value={[filters.minDiscount]}
-                      onValueChange={(value: number[]) => onFiltersChange({ ...filters, minDiscount: value[0] })}
+                      value={[filters.minPriceDrop]}
+                      onValueChange={(value: number[]) => onFiltersChange({ ...filters, minPriceDrop: value[0] })}
                       max={50}
                       step={1}
                     >
                       <Slider.Track className="bg-gray-200 relative grow rounded-full h-2">
-                        <Slider.Range className="absolute bg-blue-500 rounded-full h-full" />
+                        <Slider.Range className="absolute bg-green-500 rounded-full h-full" />
                       </Slider.Track>
-                      <Slider.Thumb className="block w-5 h-5 bg-white border-2 border-blue-500 rounded-full hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-grab active:cursor-grabbing shadow-sm" />
+                      <Slider.Thumb className="block w-5 h-5 bg-white border-2 border-green-500 rounded-full hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-500 cursor-grab active:cursor-grabbing shadow-sm" />
                     </Slider.Root>
                     <div className="flex justify-between text-xs text-gray-500 mt-1">
                       <span>0%</span>
@@ -208,16 +207,16 @@ export function FiltersHorizontal({ filters, onFiltersChange, categories, maxPri
                     </div>
                   </div>
 
-                  {filters.minDiscount > 0 && (
+                  {filters.minPriceDrop > 0 && (
                     <div className="pt-2 border-t">
                       <button
                         onClick={() => {
-                          onFiltersChange({ ...filters, minDiscount: 0 });
+                          onFiltersChange({ ...filters, minPriceDrop: 0 });
                           setOpenPopover(null);
                         }}
                         className="text-sm text-gray-600 hover:text-gray-900"
                       >
-                        {t('filters.clearDiscountFilter')}
+                        {t('filters.clearFilter')}
                       </button>
                     </div>
                   )}
@@ -292,6 +291,55 @@ export function FiltersHorizontal({ filters, onFiltersChange, categories, maxPri
               </Popover.Content>
             </Popover.Portal>
           </Popover.Root>
+
+          {/* Status Filter */}
+          <Popover.Root open={openPopover === 'status'} onOpenChange={(open) => setOpenPopover(open ? 'status' : null)}>
+            <Popover.Trigger asChild>
+              <button className={`px-4 py-2 text-sm border rounded-full flex items-center gap-2 transition-colors ${
+                statusActive
+                  ? 'border-purple-500 bg-purple-50 text-purple-700 font-medium'
+                  : 'border-gray-200 hover:bg-gray-50 text-gray-700'
+              }`}>
+                <span>
+                  {filters.statusFilter === 'all' ? t('filters.status')
+                    : filters.statusFilter === 'new' ? t('filters.statusNew')
+                    : filters.statusFilter === 'returning' ? t('filters.statusReturned')
+                    : filters.statusFilter === 'disappeared' ? t('filters.statusGone')
+                    : t('filters.statusUnchanged')}
+                </span>
+                <ChevronDown className="w-3 h-3" />
+              </button>
+            </Popover.Trigger>
+            <Popover.Portal>
+              <Popover.Content className="bg-white rounded-xl shadow-xl border border-gray-200 p-2 z-50 w-56" sideOffset={8}>
+                <div className="space-y-1">
+                  {([
+                    { value: 'all', labelKey: 'filters.statusAllProducts' },
+                    { value: 'new', labelKey: 'filters.statusNewProducts' },
+                    { value: 'returning', labelKey: 'filters.statusBackInStock' },
+                    { value: 'disappeared', labelKey: 'filters.statusNoLongerListed' },
+                    { value: 'stable', labelKey: 'filters.statusUnchanged' },
+                  ] as const).map(({ value, labelKey }) => (
+                    <button
+                      key={value}
+                      onClick={() => {
+                        onFiltersChange({ ...filters, statusFilter: value });
+                        setOpenPopover(null);
+                      }}
+                      className={`w-full flex items-center justify-between px-3 py-2 text-sm rounded-lg transition-colors ${
+                        filters.statusFilter === value
+                          ? 'bg-purple-50 text-purple-700 font-medium'
+                          : 'text-gray-700 hover:bg-gray-50'
+                      }`}
+                    >
+                      <span>{t(labelKey)}</span>
+                      {filters.statusFilter === value && <Check className="w-4 h-4" />}
+                    </button>
+                  ))}
+                </div>
+              </Popover.Content>
+            </Popover.Portal>
+          </Popover.Root>
         </div>
 
         {/* Sort By - Right Aligned */}
@@ -300,33 +348,40 @@ export function FiltersHorizontal({ filters, onFiltersChange, categories, maxPri
           <Popover.Root open={openPopover === 'sort'} onOpenChange={(open) => setOpenPopover(open ? 'sort' : null)}>
             <Popover.Trigger asChild>
               <button className="px-4 py-2 text-sm border border-gray-200 rounded-full flex items-center gap-2 hover:bg-gray-50 text-gray-700 font-medium">
-                <span>{t(`filters.sortOptions.${filters.sortBy.replace('-', '_').replace('price_low', 'priceLow').replace('price_high', 'priceHigh')}`)}</span>
+                <span>
+                  {filters.sortBy === 'price-drop' ? t('filters.sortOptions.priceDrop')
+                    : filters.sortBy === 'price-low' ? t('filters.sortOptions.priceLow')
+                    : filters.sortBy === 'price-high' ? t('filters.sortOptions.priceHigh')
+                    : t('filters.sortOptions.name')}
+                </span>
                 <ChevronDown className="w-3 h-3" />
               </button>
             </Popover.Trigger>
             <Popover.Portal>
               <Popover.Content className="bg-white rounded-xl shadow-xl border border-gray-200 p-2 z-50 w-56" sideOffset={8} align="end">
                 <div className="space-y-1">
-                  {(['discount', 'savings', 'price-low', 'price-high', 'name'] as const).map((option) => {
-                    const translationKey = option.replace('-', '_').replace('price_low', 'priceLow').replace('price_high', 'priceHigh');
-                    return (
-                      <button
-                        key={option}
-                        onClick={() => {
-                          onFiltersChange({ ...filters, sortBy: option });
-                          setOpenPopover(null);
-                        }}
-                        className={`w-full flex items-center justify-between px-3 py-2 text-sm rounded-lg transition-colors ${
-                          filters.sortBy === option
-                            ? 'bg-blue-50 text-blue-700 font-medium'
-                            : 'text-gray-700 hover:bg-gray-50'
-                        }`}
-                      >
-                        <span>{t(`filters.sortOptions.${translationKey}`)}</span>
-                        {filters.sortBy === option && <Check className="w-4 h-4" />}
-                      </button>
-                    );
-                  })}
+                  {([
+                    { value: 'price-drop', labelKey: 'filters.sortOptions.priceDrop' },
+                    { value: 'price-low', labelKey: 'filters.sortOptions.priceLow' },
+                    { value: 'price-high', labelKey: 'filters.sortOptions.priceHigh' },
+                    { value: 'name', labelKey: 'filters.sortOptions.name' },
+                  ] as const).map(({ value, labelKey }) => (
+                    <button
+                      key={value}
+                      onClick={() => {
+                        onFiltersChange({ ...filters, sortBy: value });
+                        setOpenPopover(null);
+                      }}
+                      className={`w-full flex items-center justify-between px-3 py-2 text-sm rounded-lg transition-colors ${
+                        filters.sortBy === value
+                          ? 'bg-blue-50 text-blue-700 font-medium'
+                          : 'text-gray-700 hover:bg-gray-50'
+                      }`}
+                    >
+                      <span>{t(labelKey)}</span>
+                      {filters.sortBy === value && <Check className="w-4 h-4" />}
+                    </button>
+                  ))}
                 </div>
               </Popover.Content>
             </Popover.Portal>

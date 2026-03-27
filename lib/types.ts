@@ -1,34 +1,50 @@
+export interface PricePoint {
+  date: string;
+  price: number;
+}
+
 export interface Product {
-  category: string;
   id: string;
   name: string;
-  price: number;
-  originalPrice: number | null;
-  discount: number | null;
-  currency: string;
-  displayPrice: string;
-  storeId: string;
+  category: string;
+  imageUrl: string | null;
   storeName: string;
   itemMsid: string;
-  stockLevel: string;
-  limit: string;
-  imageUrl: string;
+
+  price: number;
+  currency: string;
+
+  previousPrice: number | null;
+  previousDate: string | null;
+  priceChangePct: number | null;
+
+  allTimeLow: number;
+  allTimeHigh: number;
+  avgPrice: number;
+  priceHistory: PricePoint[];
+
+  status: 'new' | 'returning' | 'stable' | 'disappeared';
+  firstSeen: string;
+  lastSeen: string;
+  timesSeen: number;
 }
 
 export interface CategoryStats {
   name: string;
   productCount: number;
   avgPrice: number;
-  avgDiscount: number;
+  avgPriceChange: number;
   minPrice: number;
   maxPrice: number;
 }
 
+export type ProductStatus = 'new' | 'returning' | 'stable' | 'disappeared';
+
 export interface FilterOptions {
   categories: string[];
   priceRange: [number, number];
-  minDiscount: number;
+  minPriceDrop: number;
   searchQuery: string;
-  sortBy: 'discount' | 'price-low' | 'price-high' | 'name' | 'savings';
-  hasLimit: boolean | null;
+  sortBy: 'price-drop' | 'price-low' | 'price-high' | 'name';
+  statusFilter: 'all' | ProductStatus;
 }
