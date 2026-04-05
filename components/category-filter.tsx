@@ -90,6 +90,15 @@ const categoryConfig: Record<string, { icon: React.ElementType; color: string; b
   snacks: { icon: GiPopcorn, color: 'text-yellow-600', bgColor: 'bg-yellow-50 hover:bg-yellow-100' },
   viatamin: { icon: GiPill, color: 'text-emerald-600', bgColor: 'bg-emerald-50 hover:bg-emerald-100' }, // vitamin misspelled
   vitamin: { icon: GiPill, color: 'text-emerald-600', bgColor: 'bg-emerald-50 hover:bg-emerald-100' },
+  vitamins: { icon: GiPill, color: 'text-emerald-600', bgColor: 'bg-emerald-50 hover:bg-emerald-100' },
+  'baby-child': { icon: FaBaby, color: 'text-pink-600', bgColor: 'bg-pink-50 hover:bg-pink-100' },
+  confectionery: { icon: GiChocolateBar, color: 'text-indigo-600', bgColor: 'bg-indigo-50 hover:bg-indigo-100' },
+  'dairy-eggs': { icon: GiMilkCarton, color: 'text-blue-500', bgColor: 'bg-blue-50 hover:bg-blue-100' },
+  'flowers-plants': { icon: GiFlowerPot, color: 'text-pink-600', bgColor: 'bg-pink-50 hover:bg-pink-100' },
+  'fruit-veg': { icon: GiTomato, color: 'text-green-600', bgColor: 'bg-green-50 hover:bg-green-100' },
+  'personal-care': { icon: FaShower, color: 'text-purple-600', bgColor: 'bg-purple-50 hover:bg-purple-100' },
+  'pet-care': { icon: MdPets, color: 'text-orange-700', bgColor: 'bg-orange-50 hover:bg-orange-100' },
+  'prepared-food': { icon: GiHotMeal, color: 'text-red-600', bgColor: 'bg-red-50 hover:bg-red-100' },
   // Legacy/other categories that might exist
   electronics: { icon: FaTv, color: 'text-blue-600', bgColor: 'bg-blue-50 hover:bg-blue-100' },
   grocery: { icon: MdLocalGroceryStore, color: 'text-green-600', bgColor: 'bg-green-50 hover:bg-green-100' },

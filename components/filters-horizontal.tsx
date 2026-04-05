@@ -54,6 +54,15 @@ const categoryIcons: Record<string, React.ElementType> = {
   snacks: GiPopcorn,
   viatamin: GiPill, // vitamin misspelled
   vitamin: GiPill,
+  vitamins: GiPill,
+  'baby-child': FaBaby,
+  confectionery: GiChocolateBar,
+  'dairy-eggs': GiMilkCarton,
+  'flowers-plants': GiFlowerPot,
+  'fruit-veg': GiTomato,
+  'personal-care': FaShower,
+  'pet-care': MdPets,
+  'prepared-food': GiHotMeal,
 };
 
 export function FiltersHorizontal({ filters, onFiltersChange, categories, maxPrice }: FiltersHorizontalProps) {
@@ -352,6 +361,7 @@ export function FiltersHorizontal({ filters, onFiltersChange, categories, maxPri
                   {filters.sortBy === 'price-drop' ? t('filters.sortOptions.priceDrop')
                     : filters.sortBy === 'price-low' ? t('filters.sortOptions.priceLow')
                     : filters.sortBy === 'price-high' ? t('filters.sortOptions.priceHigh')
+                    : filters.sortBy === 'near-low' ? t('filters.sortOptions.nearLow')
                     : t('filters.sortOptions.name')}
                 </span>
                 <ChevronDown className="w-3 h-3" />
@@ -362,6 +372,7 @@ export function FiltersHorizontal({ filters, onFiltersChange, categories, maxPri
                 <div className="space-y-1">
                   {([
                     { value: 'price-drop', labelKey: 'filters.sortOptions.priceDrop' },
+                    { value: 'near-low', labelKey: 'filters.sortOptions.nearLow' },
                     { value: 'price-low', labelKey: 'filters.sortOptions.priceLow' },
                     { value: 'price-high', labelKey: 'filters.sortOptions.priceHigh' },
                     { value: 'name', labelKey: 'filters.sortOptions.name' },

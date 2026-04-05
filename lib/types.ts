@@ -45,6 +45,6 @@ export interface FilterOptions {
   priceRange: [number, number];
   minPriceDrop: number;
   searchQuery: string;
-  sortBy: 'price-drop' | 'price-low' | 'price-high' | 'name';
+  sortBy: 'price-drop' | 'price-low' | 'price-high' | 'near-low' | 'name';
   statusFilter: 'all' | ProductStatus;
 }

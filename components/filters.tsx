@@ -54,6 +54,9 @@ export function Filters({ filters, onFiltersChange, categories, maxPrice }: Filt
                 <Select.Item value="price-drop" className="px-3 py-2 hover:bg-gray-100 rounded cursor-pointer outline-none text-gray-900">
                   <Select.ItemText>{t('filters.sortOptions.priceDrop')}</Select.ItemText>
                 </Select.Item>
+                <Select.Item value="near-low" className="px-3 py-2 hover:bg-gray-100 rounded cursor-pointer outline-none text-gray-900">
+                  <Select.ItemText>{t('filters.sortOptions.nearLow')}</Select.ItemText>
+                </Select.Item>
                 <Select.Item value="price-low" className="px-3 py-2 hover:bg-gray-100 rounded cursor-pointer outline-none text-gray-900">
                   <Select.ItemText>{t('filters.sortOptions.priceLow')}</Select.ItemText>
                 </Select.Item>
@@ -129,7 +132,7 @@ export function Filters({ filters, onFiltersChange, categories, maxPrice }: Filt
           priceRange: [0, maxPrice],
           minPriceDrop: 0,
           searchQuery: '',
-          sortBy: 'price-drop',
+          sortBy: 'near-low',
           statusFilter: 'all',
         })}
         className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors"

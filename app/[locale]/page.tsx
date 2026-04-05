@@ -34,7 +34,7 @@ export default function Home() {
     priceRange: [0, 1000],
     minPriceDrop: 0,
     searchQuery: '',
-    sortBy: 'price-drop',
+    sortBy: 'near-low',
     statusFilter: 'all',
   });
 
@@ -110,6 +110,15 @@ export default function Home() {
           return a.price - b.price;
         case 'price-high':
           return b.price - a.price;
+        case 'near-low': {
+          const rangeA = a.allTimeHigh - a.allTimeLow;
+          const rangeB = b.allTimeHigh - b.allTimeLow;
+          const pctA = rangeA > 0 ? (a.price - a.allTimeLow) / rangeA : 1;
+          const pctB = rangeB > 0 ? (b.price - b.allTimeLow) / rangeB : 1;
+          return pctA !== pctB
+            ? pctA - pctB
+            : (a.priceChangePct ?? 0) - (b.priceChangePct ?? 0);
+        }
         case 'name':
           return a.name.localeCompare(b.name);
         default:
@@ -154,7 +163,7 @@ export default function Home() {
     if (filters.minPriceDrop > 0) count++;
     if (filters.statusFilter !== 'all') count++;
     if (filters.priceRange[0] > 0 || filters.priceRange[1] < maxPrice) count++;
-    if (filters.sortBy !== 'price-drop') count++;
+    if (filters.sortBy !== 'near-low') count++;
     return count;
   }, [filters, maxPrice]);
 

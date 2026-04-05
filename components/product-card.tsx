@@ -1,11 +1,13 @@
 'use client';
 
+import { useState } from 'react';
 import { Product } from '@/lib/types';
 import { formatCurrency, formatDate, cn } from '@/lib/utils';
 import { Package, TrendingDown, TrendingUp, Minus, Sparkles, RotateCcw, EyeOff } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { ProductDetailModal } from './product-detail-modal';
 
 interface ProductCardProps {
   product: Product;
@@ -14,6 +16,7 @@ interface ProductCardProps {
 
 export function ProductCard({ product, index = 0 }: ProductCardProps) {
   const t = useTranslations();
+  const [showDetail, setShowDetail] = useState(false);
 
   const priceDrop = product.priceChangePct !== null && product.priceChangePct < 0;
   const priceRise = product.priceChangePct !== null && product.priceChangePct > 0;
@@ -21,13 +24,15 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
   const isDisappeared = product.status === 'disappeared';
 
   return (
+    <>
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.05 }}
       whileHover={{ y: -4 }}
+      onClick={() => setShowDetail(true)}
       className={cn(
-        "bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden relative",
+        "bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden relative cursor-pointer",
         "hover:shadow-lg transition-all duration-300",
         priceDrop && "ring-2 ring-green-500 ring-opacity-50",
         isDisappeared && "opacity-60"
@@ -146,6 +151,13 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
         )}
       </div>
     </motion.div>
+
+    <AnimatePresence>
+      {showDetail && (
+        <ProductDetailModal product={product} onClose={() => setShowDetail(false)} />
+      )}
+    </AnimatePresence>
+    </>
   );
 }
 
